@@ -1,0 +1,38 @@
+
+.login-align {
+    vertical-align: middle;
+}
+
+.login-card {
+    padding-top: 41px;
+    padding-left: 44px;
+    padding-right: 44px;
+    padding-bottom: 19px;
+}
+
+.login-check-user, .login-card {
+    border-radius: 0px;
+    max-width: 405px;
+}
+
+.login-check-user {
+    text-align: center;
+    margin-top: 16px;
+    padding-top: 17px;
+    padding-bottom: 12px;
+}
+
+.register-url {
+    text-decoration: none;
+}
+
+.display-full-size {
+    height: 100%;
+}
+
+.login-button {
+    width: 315px;
+    background: #3c95f6;
+    border-color: #3c95f6;
+    border-radius: 10px;
+}
