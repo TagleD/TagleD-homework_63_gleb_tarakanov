@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
-
+from django.forms import TextInput
 
 
 class LoginForm(forms.Form):
@@ -14,10 +14,18 @@ class CustomUserCreationForm(forms.ModelForm):
     password = forms.CharField(label='Пароль', strip=False, required=True, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label='Подтвердите пароль', strip=False, required=True, widget=forms.PasswordInput)
 
+    def __init__(self, *args, **kwargs):
+        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+        self.fields['username'].help_text = None
 
     class Meta:
         model = get_user_model()
         fields = ('username', 'password', 'password_confirm', 'first_name', 'last_name', 'email', 'avatar', 'birth_date')
+        widgets = {
+            'username': TextInput(attrs={'placeholder': 'Логин'}),
+            'first_name': TextInput(attrs={'placeholder': 'Имя'}),
+            'last_name': TextInput(attrs={'placeholder': 'Фамилия'})
+        }
 
     def clean(self):
         cleaned_data = super().clean()
@@ -29,7 +37,7 @@ class CustomUserCreationForm(forms.ModelForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data.get('password'))
-        user.groups.add('user')
+        # user.groups.add('user')
         if commit:
             user.save()
         return user

@@ -1,39 +1,40 @@
-{% extends 'base.html' %}
+{% extends 'login_registration_template.html' %}
+{% load static %}
 
 {% load django_bootstrap5 %}
 
+
 {% block content %}
-    <form method="post">
-        <div class="form">
-            {% csrf_token %}
-        {% bootstrap_form form %}
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center display-full-size">
+            <div class="col-4">
+                <div class="login-align">
+                    <div class="card login-card">
+                        <div class="row">
+                            <div class="col-8 mx-auto">
+                                <img src="{% static 'img/instagram_logo_str.png' %}" class="img-fluid"
+                                     alt="Лого инстаграм">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p class="register-text">Зарегистрируйтесь, чтобы смотреть фото и видео ваших друзей.</p>
+                        </div>
+                        <form method="post">
+                            <div class="form square-inputs">
+                                {% csrf_token %}
+                                {% bootstrap_form form show_label=False fields_class="privet"  %}
+                            </div>
+                            <div class="form_row">
+                                {% bootstrap_button button_type="submit" content='Регистрация' button_class="btn btn-primary login-register-button" %}
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card down-register-card">
+                        <p class="account-question">Есть аккаунт?<a href="{% url 'login' %}" class="register-url">
+                            Вход</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form_row">
-            {% bootstrap_button button_type="submit" content='Зарегистрироваться' %}
-        </div>
-    </form>
+    </div>
 {% endblock %}
-
-
-
-{#{% block content %}#}
-{#    <div class="container">#}
-{#        <div class="row d-flex justify-content-center">#}
-{#            <div class="col-4">#}
-{#                <img src="{% static 'img/login_phone_image.png' %}" class="img-fluid"#}
-{#                     alt="Просмотр публикаций instagram">#}
-{#            </div>#}
-{#            <div class="col-4">#}
-{#                <form action="{% url 'login' %}" method="post">#}
-{#                    <div class="form">#}
-{#                        {% csrf_token %}#}
-{#                        {% bootstrap_form form %}#}
-{#                    </div>#}
-{#                    <div class="form_row">#}
-{#                        {% bootstrap_button button_type="submit" content='Войти' %}#}
-{#                    </div>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#{% endblock %}#}

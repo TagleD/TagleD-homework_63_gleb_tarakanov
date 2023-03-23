@@ -25,12 +25,13 @@
                                 {% bootstrap_form form %}
                             </div>
                             <div class="form_row">
-                                {% bootstrap_button button_type="submit" content='Войти' button_class="btn btn-primary login-button" %}
+                                {% bootstrap_button button_type="submit" content='Войти' button_class="btn btn-primary login-register-button" %}
                             </div>
                         </form>
                     </div>
                     <div class="card login-check-user">
-                        <h6>У вас еще нет аккаунта? <a href="#" class="register-url">Зарегистрироваться</a></h6>
+                        <h6>У вас еще нет аккаунта? <a href="{% url 'register' %}" class="register-url">Зарегистрироваться</a>
+                        </h6>
                     </div>
                 </div>
             </div>
@@ -39,26 +40,5 @@
 {% endblock %}
 
 
-{#{% block content %}#}
-{#    <div class="container">#}
-{#        <div class="row d-flex justify-content-center align-items-center display-full-size">#}
-{#            <div class="col-4 card login-card-align">#}
-{#                <div class="row">#}
-{#                    <div class="col-9">#}
-{#                        w#}
-{#                    </div>#}
-{#                </div>#}
-{#                <form action="{% url 'login' %}" method="post">#}
-{#                    <div class="form">#}
-{#                        {% csrf_token %}#}
-{#                        {% bootstrap_form form %}#}
-{#                    </div>#}
-{#                    <div class="form_row">#}
-{#                        {% bootstrap_button button_type="submit" content='Войти' %}#}
-{#                    </div>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#{% endblock %}#}
+
 

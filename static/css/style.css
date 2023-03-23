@@ -10,7 +10,7 @@
     padding-bottom: 19px;
 }
 
-.login-check-user, .login-card {
+.login-check-user, .login-card, .down-register-card {
     border-radius: 0px;
     max-width: 405px;
 }
@@ -30,9 +30,34 @@
     height: 100%;
 }
 
-.login-button {
+.login-register-button {
     width: 315px;
     background: #3c95f6;
     border-color: #3c95f6;
     border-radius: 10px;
+}
+
+.register-text {
+    color: #8e8e8e;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: center;
+    margin: 15px 0px 23px 0px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.square-inputs > input {
+    border-radius: 0px;
+}
+
+.account-question{
+    font-size: 14px;
+    margin: 15px;
+    text-align: center;
+}
+
+.down-register-card {
+    margin-top: 16px;
 }
