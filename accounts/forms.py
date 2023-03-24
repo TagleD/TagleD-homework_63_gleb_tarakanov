@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
 from django.forms import TextInput, FileInput
 
 
@@ -53,7 +52,7 @@ class CustomUserCreationForm(forms.ModelForm):
 class UserChangeForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ('first_name', 'email', 'avatar', )
+        fields = ('first_name', 'email', 'avatar',)
         labels = {
             'first_name': 'Имя',
             'email': 'Email',
