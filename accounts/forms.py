@@ -1,18 +1,18 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
-from django.forms import TextInput
+from django.forms import TextInput, FileInput
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(required=True, label='Почта или логин')
+    email = forms.EmailField(required=True, label='Электронный адрес')
     password = forms.CharField(required=True, label='Пароль', widget=forms.PasswordInput)
-
 
 
 class CustomUserCreationForm(forms.ModelForm):
     password = forms.CharField(label='Пароль', strip=False, required=True, widget=forms.PasswordInput)
-    password_confirm = forms.CharField(label='Подтвердите пароль', strip=False, required=True, widget=forms.PasswordInput)
+    password_confirm = forms.CharField(label='Подтвердите пароль', strip=False, required=True,
+                                       widget=forms.PasswordInput)
 
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
@@ -20,11 +20,18 @@ class CustomUserCreationForm(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
-        fields = ('username', 'password', 'password_confirm', 'first_name', 'last_name', 'email', 'avatar', 'birth_date')
+        fields = (
+            'username', 'password', 'password_confirm',
+            'first_name', 'description',
+            'phone', 'email', 'avatar',
+            'gender'
+        )
         widgets = {
             'username': TextInput(attrs={'placeholder': 'Логин'}),
             'first_name': TextInput(attrs={'placeholder': 'Имя'}),
-            'last_name': TextInput(attrs={'placeholder': 'Фамилия'})
+            'description': TextInput(attrs={'placeholder': 'Информация о пользователе'}),
+            'phone': TextInput(attrs={'placeholder': '+77077077777'}),
+            'avatar': FileInput(attrs={'enctype': 'multipart/form-data'})
         }
 
     def clean(self):
@@ -46,11 +53,9 @@ class CustomUserCreationForm(forms.ModelForm):
 class UserChangeForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ('first_name', 'last_name', 'email', 'avatar', 'birth_date')
+        fields = ('first_name', 'email', 'avatar', )
         labels = {
             'first_name': 'Имя',
-            'last_name': 'Фамилия',
             'email': 'Email',
-            'avatar': 'Аватарка',
-            'birth_date': 'Дата рождения',
+            'avatar': 'Аватарка'
         }
