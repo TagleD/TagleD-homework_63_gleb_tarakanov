@@ -1,22 +1,56 @@
 {% extends 'base.html' %}
-{% block title %}Пользователь{% endblock %}
-
-{% block menu %}
-    <li><a href=" {% url 'change' user_obj.pk %}" class="btn btn-primary">Редактировать</a></li>
-    <li><a href="#" class="btn btn-primary">Смена пароля</a></li>
-{% endblock %}
+{% block title %}Аккаунт{% endblock %}
 
 {% block content %}
-    <h1>Личная страница пользователя {{ user_obj.get_full_name|default:user_obj.username }}</h1>
-    {% if user_obj.profile.avatar %}
-        <img class="avatar" src="{{ user_obj.profile.avatar.url }}" width="250" height="250" alt="user picture">
-    {% endif %}
-    <p>Имя пользователя: {{ user_obj.username }}</p>
-    <p>Имя: {{ user_obj.first_name }}</p>
-    <p>Фамилия: {{ user_obj.last_name }}</p>
-    <p>Дата рождения: {{ user_obj.profile.birth_date|date:'d.m.Y' }}</p>
-    <p>Почта: {{ user_obj.email }}</p>
+    <div class="container">
+        <div class="row">
+            <div class="row d-flex justify-content-center post-margin-top">
+                <div class="col-9">
+                    <div class="row profile-margin-top">
+                        {# Разметка для аватара #}
+                        <div class="col-3">
+                            {% if user.avatar %}
+                                <img src="{{ user.avatar.url }}"  class="profile-avatar" alt="Аватар">
+                            {% else %}
+                                <img src="img/noname.jpeg" class="img-fluid" alt="Аватар">
+                            {% endif %}
+                        </div>
+                        {# Разметка для информаци о пользователе #}
+                        <div class="col-8">
+                            <div class="row profile-info-margin">
+                                <div class="col-3">
+                                    <h5 class="profile-username">{{ user.username }}</h5>
+                                </div>
+                                <div class="col-7 profile-edit-block">
+                                    <a href="{% url 'change' user.pk %}" class="profile-link-edit">Редактировать профиль</a>
+                                </div>
+                                <div class="col-2">
+                                    <a href="{% url 'logout' %}">Выйти</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <p><b>{{ posts_count }}</b> публикаций</p>
+                                </div>
+                                <div class="col-3"><b>{{ subscribers }}</b> подписчиков</div>
+                                <div class="col-3"><b>{{ subscriptions }}</b> подписок</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p><b>{{ user.first_name }}</b></p>
+                                </div>
+                            </div>
+                            <div class="row profile-description">
+                                <div class="col-12">
+                                    <p>{{ user.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% include 'partial/posts_list.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <h2 class="text-center clear">Избранное:</h2>
-    {% include 'partial/article_list.html' %}
 {% endblock %}

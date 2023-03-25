@@ -52,9 +52,11 @@ class CustomUserCreationForm(forms.ModelForm):
 class UserChangeForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = ('first_name', 'email', 'avatar',)
-        labels = {
-            'first_name': 'Имя',
-            'email': 'Email',
-            'avatar': 'Аватарка'
+        fields = ('first_name', 'email', 'avatar', 'phone', 'description', 'gender')
+        widgets = {
+            'first_name': TextInput(attrs={'placeholder': 'Имя'}),
+            'email': TextInput(attrs={'placeholder': 'Электронный адрес'}),
+            'description': TextInput(attrs={'placeholder': 'Информация о пользователе'}),
+            'phone': TextInput(attrs={'placeholder': '+77077077777'}),
+            'avatar': FileInput(attrs={'enctype': 'multipart/form-data'})
         }

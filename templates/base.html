@@ -27,7 +27,7 @@
             <input class="form-control me-2" type="search" placeholder="Найти 🔎" aria-label="Найти">
         </form>
         {% if user.is_authenticated %}
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{% url 'profile' user.pk %}">
                 <section class="image">
                     <div class="image__src"
                          style="background-image: url('/uploads/{{ user.avatar }}')">

@@ -1,16 +1,41 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
 {% block title %}Редактировать пользователя{% endblock %}
-{% block menu_links %}
-    <li><a href="{% url "profile" user_obj.pk %}">Назад</a></li>
-    <li><a href="#">Смена пароля</a></li>
-{% endblock %}
+
 {% block content %}
-    <h1>Поменять личные данные</h1>
-    <form action="{% url 'change' user_obj.pk %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% include 'partial/form.html' with form=form fields_only=True %}
-        {% include 'partial/form.html' with form=profile_form fields_only=True %}
-        <br>
-        <input type="submit" value="Редактировать">
-    </form>
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center display-full-size">
+            <div class="col-4">
+                <div class="login-align">
+                    <div class="card login-card">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="change-title">Редактировать пользователя</h5>
+                            </div>
+                            <form action="{% url 'change' user.pk %}" method="post" enctype="multipart/form-data">
+                                <div class="form square-inputs">
+                                    {% csrf_token %}
+                                    {% bootstrap_form form show_label=False %}
+                                </div>
+                                <div class="form_row">
+                                    {% bootstrap_button button_type="submit" content='Редактировать' button_class="btn btn-primary login-register-button" %}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{#    <form action="{% url 'change' user_obj.pk %}" method="post" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        {% include 'partial/form.html' with form=form fields_only=True %}#}
+{#        {% include 'partial/form.html' with form=profile_form fields_only=True %}#}
+{#        <br>#}
+{#        <input type="submit" value="Редактировать">#}
+{#    </form>#}
 {% endblock %}

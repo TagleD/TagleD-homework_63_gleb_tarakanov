@@ -61,21 +61,25 @@ class RegisterView(CreateView):
 class ProfileView(LoginRequiredMixin, DetailView):
     model = get_user_model()
     template_name = 'user_detail.html'
-    context_object_name = 'user_obj'
-    paginate_related_by = 3
+    paginate_related_by = 9
     paginate_related_orphans = 0
 
+
+
     def get_context_data(self, **kwargs):
-        articles = self.object.articles.order_by('-created_at')
+        posts = self.object.posts.order_by('-created_at')
         paginator = Paginator(
-            articles,
+            posts,
             self.paginate_related_by,
             orphans=self.paginate_related_orphans
         )
         page_number = self.request.GET.get('page', 1)
         page = paginator.get_page(page_number)
+        kwargs['posts_count'] = self.object.posts.count()
+        kwargs['subscribers'] = self.object.subscribers.count()
+        kwargs['subscriptions'] = self.object.subscriptions.count()
         kwargs['page_obj'] = page
-        kwargs['articles'] = page.object_list
+        kwargs['posts'] = page.object_list
         kwargs['is_paginated'] = page.has_other_pages()
         return super().get_context_data(**kwargs)
 
@@ -84,7 +88,7 @@ class UserChangeView(UpdateView):
     model = get_user_model()
     form_class = UserChangeForm
     template_name = 'user_change.html'
-    context_object_name = 'user_obj'
+    context_object_name = 'user'
 
     def get_success_url(self):
         return reverse('profile', kwargs={'pk': self.object.pk})
