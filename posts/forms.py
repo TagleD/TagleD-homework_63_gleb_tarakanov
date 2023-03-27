@@ -11,3 +11,6 @@ class PostForm(forms.ModelForm):
             'image': 'Картинка',
             'description': 'Описание'
         }
+
+# class SearchForm(forms.Form):
+    # search = forms.CharField(max_length=40, required=False, label='Найти')

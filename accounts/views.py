@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
 
@@ -22,13 +22,13 @@ class LoginView(TemplateView):
         form = self.form(request.POST)
         if not form.is_valid():
             messages.error(request, 'Некорректные данные')
-            return redirect('index')
+            return redirect('login')
         email = form.cleaned_data.get('email')
         password = form.cleaned_data.get('password')
         user = authenticate(request, email=email, password=password)
         if not user:
             messages.warning(request, 'Неправильное имя пользователя или пароль')
-            return redirect('index')
+            return redirect('login')
         messages.success(request, 'Добро пожаловать')
         next = request.GET.get('next')
         login(request, user)
@@ -75,6 +75,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
         )
         page_number = self.request.GET.get('page', 1)
         page = paginator.get_page(page_number)
+        kwargs['subscribe'] = self.request.user.subscriptions.filter(pk=kwargs.get('object').pk).exists()
         kwargs['user_obj'] = kwargs.get('object')
         kwargs['posts_count'] = self.object.posts.count()
         kwargs['subscribers'] = self.object.subscribers.count()
@@ -93,6 +94,23 @@ class UserChangeView(UpdateView):
 
     def get_success_url(self):
         return reverse('profile', kwargs={'pk': self.object.pk})
+
+
+def subscribe_on_account(request, pk):
+    if request.user.is_authenticated:
+        account_to_follow = get_object_or_404(get_user_model(), pk=pk)
+        request.user.subscriptions.add(account_to_follow)
+        return redirect('profile', account_to_follow.pk)
+    return redirect('login')
+
+
+def unsubscribe_on_account(request, pk):
+    if request.user.is_authenticated:
+        account_to_unsubscribe = get_object_or_404(get_user_model(), pk=pk)
+        request.user.subscriptions.remove(account_to_unsubscribe)
+        return redirect('profile', account_to_unsubscribe.pk)
+    return redirect('login')
+
 
 
 

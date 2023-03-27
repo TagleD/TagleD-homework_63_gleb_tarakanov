@@ -65,6 +65,7 @@ class Account(AbstractUser):
         related_name='user_comments'
     )
 
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'avatar']
 
