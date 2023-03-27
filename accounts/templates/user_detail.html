@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Аккаунт{% endblock %}
+{% load static %}
 
 {% block content %}
     <div class="container">
@@ -9,20 +10,23 @@
                     <div class="row profile-margin-top">
                         {# Разметка для аватара #}
                         <div class="col-3">
-                            {% if user.avatar %}
-                                <img src="{{ user.avatar.url }}"  class="profile-avatar" alt="Аватар">
+                            {% if user_obj.avatar %}
+                                <img src="{{ user_obj.avatar.url }}"  class="profile-avatar" alt="Аватар">
                             {% else %}
-                                <img src="img/noname.jpeg" class="img-fluid" alt="Аватар">
+                                <img src="{% static 'img/noname.jpeg' %}" class="profile-avatar" alt="Аватар">
                             {% endif %}
                         </div>
                         {# Разметка для информаци о пользователе #}
                         <div class="col-8">
                             <div class="row profile-info-margin">
-                                <div class="col-3">
-                                    <h5 class="profile-username">{{ user.username }}</h5>
+                                <div class="col-4">
+                                    <h5 class="profile-username">{{ user_obj.username }}</h5>
                                 </div>
-                                <div class="col-7 profile-edit-block">
-                                    <a href="{% url 'change' user.pk %}" class="profile-link-edit">Редактировать профиль</a>
+                                <div class="col-4 profile-edit-block">
+                                    <a href="{% url 'change' user_obj.pk %}" class="profile-link-edit">Редактировать профиль</a>
+                                </div>
+                                <div class="col-2 profile-add-block">
+                                    <a href="{% url 'post_add' %}" class="profile-link-edit">Добавить</a>
                                 </div>
                                 <div class="col-2">
                                     <a href="{% url 'logout' %}">Выйти</a>
@@ -37,12 +41,12 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <p><b>{{ user.first_name }}</b></p>
+                                    <p><b>{{ user_obj.first_name }}</b></p>
                                 </div>
                             </div>
                             <div class="row profile-description">
                                 <div class="col-12">
-                                    <p>{{ user.description }}</p>
+                                    <p>{{ user_obj.description }}</p>
                                 </div>
                             </div>
                         </div>

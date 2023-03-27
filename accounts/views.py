@@ -75,6 +75,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
         )
         page_number = self.request.GET.get('page', 1)
         page = paginator.get_page(page_number)
+        kwargs['user_obj'] = kwargs.get('object')
         kwargs['posts_count'] = self.object.posts.count()
         kwargs['subscribers'] = self.object.subscribers.count()
         kwargs['subscriptions'] = self.object.subscriptions.count()

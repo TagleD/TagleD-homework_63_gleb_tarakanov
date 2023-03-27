@@ -156,7 +156,7 @@
     margin-top: 9px;
 }
 
-.post-message{
+.post-message {
     margin-top: 7px;
 }
 
@@ -164,7 +164,7 @@
     color: black;
 }
 
-.post-likes-count{
+.post-likes-count {
     margin-top: 10px;
 }
 
@@ -176,17 +176,17 @@
     margin-top: 30px;
 }
 
-.profile-avatar{
+.profile-avatar {
     border-radius: 50%;
     height: 170px;
     width: 170px;
 }
 
-.profile-info-margin{
+.profile-info-margin {
     margin-top: 15px;
 }
 
-.profile-username{
+.profile-username {
     font-size: 25px;
 }
 
@@ -201,7 +201,7 @@
     border-radius: 3px;
 }
 
-.profile-edit-block {
+.profile-edit-block, .profile-add-block {
     margin-top: 8px;
 }
 
@@ -213,11 +213,20 @@
     margin-top: 50px;
 }
 
-.profile-post-image{
+.profile-post-image {
     margin-bottom: 20px;
 }
 
 .change-title {
     text-align: center;
     margin-bottom: 25px;
+}
+
+.posts-nickname-link {
+    text-decoration: none;
+    color: black;
+}
+
+.posts-list {
+    margin-bottom: 100px;
 }
