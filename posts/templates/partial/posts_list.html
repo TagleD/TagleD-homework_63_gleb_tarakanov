@@ -3,7 +3,9 @@
         <div class="col-4">
             <div class="profile-post-image">
                 {% if post.image_square %}
-                    <img src="{{ post.image_square.url }}" width="300px" height="300px">
+                    <a href="{% url 'post_detail' post.pk %}">
+                        <img src="{{ post.image_square.url }}" width="300px" height="300px">
+                    </a>
                 {% endif %}
             </div>
         </div>
