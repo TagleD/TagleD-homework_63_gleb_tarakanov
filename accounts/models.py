@@ -2,9 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.validators import RegexValidator
 from django.db import models
-
 from accounts.manager import UserManager
-
 username_validator = UnicodeUsernameValidator()
 
 
@@ -64,7 +62,6 @@ class Account(AbstractUser):
         to='posts.Post',
         related_name='user_comments'
     )
-
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'avatar']

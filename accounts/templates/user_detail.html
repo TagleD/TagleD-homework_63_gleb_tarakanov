@@ -8,15 +8,13 @@
             <div class="row d-flex justify-content-center post-margin-top">
                 <div class="col-9">
                     <div class="row profile-margin-top">
-                        {# Разметка для аватара #}
                         <div class="col-3">
                             {% if user_obj.avatar %}
-                                <img src="{{ user_obj.avatar.url }}"  class="profile-avatar" alt="Аватар">
+                                <img src="{{ user_obj.avatar.url }}" class="profile-avatar" alt="Аватар">
                             {% else %}
                                 <img src="{% static 'img/noname.jpeg' %}" class="profile-avatar" alt="Аватар">
                             {% endif %}
                         </div>
-                        {# Разметка для информаци о пользователе #}
                         <div class="col-8">
                             <div class="row profile-info-margin">
                                 <div class="col-4">
@@ -24,7 +22,8 @@
                                 </div>
                                 <div class="col-4 profile-edit-block">
                                     {% if user_obj.pk == user.pk %}
-                                        <a href="{% url 'change' user_obj.pk %}" class="profile-link-edit">Редактировать профиль</a>
+                                        <a href="{% url 'change' user_obj.pk %}" class="profile-link-edit">Редактировать
+                                            профиль</a>
                                     {% elif subscribe %}
                                         <a href="{% url 'unsubscribe' user_obj.pk %}" class="profile-link-edit">Отписаться</a>
                                     {% else %}

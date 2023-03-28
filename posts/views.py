@@ -1,13 +1,11 @@
-from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Count, Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
-from django.views.generic import ListView, CreateView, DetailView, FormView
+from django.views.generic import ListView, CreateView, DetailView
 from django.views.generic.edit import FormMixin
-
 from posts.forms import PostForm, CommentForm
 from posts.models import Post
 
@@ -56,7 +54,8 @@ class CreatePostView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
         post = form.save(commit=False)
         post.author = self.request.user
         post.save()
-        return self.get_success_url()
+        self.object = post
+        return HttpResponseRedirect(self.get_success_url())
 
 
 def like_post(request, pk):

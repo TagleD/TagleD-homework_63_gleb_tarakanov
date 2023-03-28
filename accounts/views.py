@@ -7,9 +7,7 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.utils.http import urlencode
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, ListView
-
 from accounts.forms import LoginForm, CustomUserCreationForm, UserChangeForm, SearchForm
-from posts.models import Post
 
 
 class LoginView(TemplateView):
