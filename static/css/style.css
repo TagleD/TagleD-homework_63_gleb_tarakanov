@@ -230,3 +230,19 @@
 .posts-list {
     margin-bottom: 100px;
 }
+
+.comments-block-title {
+    color: #8e8e8e;
+    margin-top: -22px;
+    font-size: 15px;
+}
+
+.comment-username{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.comment-text {
+    margin-top: -10px;
+}
