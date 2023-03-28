@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView
 
 from accounts.forms import LoginForm, CustomUserCreationForm, UserChangeForm
+from posts.models import Post
 
 
 class LoginView(TemplateView):
@@ -42,7 +43,6 @@ def logout_view(request):
     return redirect('index')
 
 
-
 class RegisterView(CreateView):
     template_name = 'registration.html'
     form_class = CustomUserCreationForm
@@ -63,8 +63,6 @@ class ProfileView(LoginRequiredMixin, DetailView):
     template_name = 'user_detail.html'
     paginate_related_by = 9
     paginate_related_orphans = 0
-
-
 
     def get_context_data(self, **kwargs):
         posts = self.object.posts.order_by('-created_at')
@@ -110,9 +108,4 @@ def unsubscribe_on_account(request, pk):
         request.user.subscriptions.remove(account_to_unsubscribe)
         return redirect('profile', account_to_unsubscribe.pk)
     return redirect('login')
-
-
-
-
-
 
