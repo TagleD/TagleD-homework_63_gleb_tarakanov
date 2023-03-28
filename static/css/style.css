@@ -247,7 +247,7 @@
     font-size: 15px;
 }
 
-.comment-username{
+.comment-username {
     text-decoration: none;
     color: black;
     font-weight: bold;
@@ -268,9 +268,29 @@
     background: #f3f3f3
 }
 
-.search-button{
+.search-button {
     margin-top: 10px;
     text-align: center;
+}
+
+.search-title {
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
+
+.search-form > .mb-3 > input {
+    width: 300px;
+    margin-top: 1px;
+}
+
+.search-button-accounts {
+    margin-bottom: 16px;
+    margin-left: 23px;
+}
+
+.searched-accounts{
+    text-decoration: none;
+    color: black;
 }
 
 

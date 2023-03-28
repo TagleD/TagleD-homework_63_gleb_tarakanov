@@ -43,7 +43,6 @@ class CustomUserCreationForm(forms.ModelForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data.get('password'))
-        # user.groups.add('user')
         if commit:
             user.save()
         return user
@@ -60,3 +59,7 @@ class UserChangeForm(forms.ModelForm):
             'phone': TextInput(attrs={'placeholder': '+77077077777'}),
             'avatar': FileInput(attrs={'enctype': 'multipart/form-data'})
         }
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=100, required=False, label='Найти')

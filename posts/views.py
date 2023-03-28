@@ -86,8 +86,6 @@ class PostDetailView(FormMixin, DetailView):
     def get_success_url(self):
         return reverse('post_detail', kwargs={'pk': self.kwargs.get('pk')})
 
-
-
     def post(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
             form = self.get_form()
@@ -110,5 +108,3 @@ class PostDetailView(FormMixin, DetailView):
         context['likes_number'] = post.user_likes.count()
         context['is_liked'] = post.user_likes.filter(pk=self.request.user.pk).exists()
         return context
-
-
